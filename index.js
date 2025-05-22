@@ -39,6 +39,7 @@ app.post("/create", async(req, res) => {
 
 });
 
+
 app.get("/getcalendar", async (req, res) => {
 
     var consulta = await appointmentServices.GetAll(false);

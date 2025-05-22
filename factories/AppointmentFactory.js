@@ -18,12 +18,13 @@ class AppointmentFactory {
 
         const startDate = new Date(year, month - 1, day, hour, minutes, 0, 0);
 
-        return {
+        var appo = {
             id: simplesAppointment.id,
             title: `${simplesAppointment.name} - ${simplesAppointment.description}`,
             start: startDate,
             end: startDate,
         };
+        return appo;
     }
 }
 
