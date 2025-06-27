@@ -39,6 +39,38 @@ class AppointmentServices {
       return appointments;
     }
   }
+
+  async GetById(id){
+
+    try {
+      return await appointmentModel.findById(id);
+      
+    }catch (error) {
+      console.log(error);
+    }
+  }
+
+  async Finish(id){
+    try {
+      await appointmentModel.findByIdAndUpdate(id, {finished: true});
+      return true;
+
+    }catch(error) {
+      console.log(`Erro: ${error}`);
+      return false;
+    }
+  }
+
+  async search(query){
+    try {
+      var appos = await appointmentModel.find().or([{email: query},{cpf: query}])
+      return appos;
+    }catch(error){
+      console.log(error);
+      return [];
+    }
+    console.log(appos);
+  }
 }
 
 module.exports = new AppointmentServices();

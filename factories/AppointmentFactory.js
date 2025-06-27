@@ -4,8 +4,7 @@ class AppointmentFactory {
 
         if (typeof simplesAppointment.date === "string") {
             [year, month, day] = simplesAppointment.date.split("-").map(Number);
-        }
-        else if (simplesAppointment.date instanceof Date) {
+        } else if (simplesAppointment.date instanceof Date) {
             year = simplesAppointment.date.getFullYear();
             month = simplesAppointment.date.getMonth() + 1;
             day = simplesAppointment.date.getDate();
@@ -13,20 +12,19 @@ class AppointmentFactory {
             throw new Error("Formato de data inválido em simplesAppointment.date");
         }
 
-        const hour = parseInt(simplesAppointment.time.split(":")[0]);
-        const minutes = parseInt(simplesAppointment.time.split(":")[1]);
+        const [hour, minutes] = simplesAppointment.time.split(":").map(Number);
 
         const startDate = new Date(year, month - 1, day, hour, minutes, 0, 0);
 
-        var appo = {
-            id: simplesAppointment.id,
+        const appo = {
+            id: simplesAppointment._id?.toString() || simplesAppointment.id, // <- garante ID válido
             title: `${simplesAppointment.name} - ${simplesAppointment.description}`,
-            start: startDate,
-            end: startDate,
+            start: startDate.toISOString(), // <- formato ISO exigido pelo FullCalendar
+            end: startDate.toISOString(),
         };
+
         return appo;
     }
 }
 
 module.exports = new AppointmentFactory();
-

@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const appointmentServices = require('./services/AppointmentServices');
+const Appointment = require('./models/Appointment');
+const AppointmentServices = require('./services/AppointmentServices');
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -47,6 +49,34 @@ app.get("/getcalendar", async (req, res) => {
     res.json(consulta);
 
 });
+
+app.get("/event/:id", async (req, res) => {
+    var appointment = await AppointmentServices.GetById(req.params.id);
+    console.log(appointment);
+    res.render("event", {appo: appointment});
+})
+
+
+app.post("/finish", async (req, res) => {
+    var id = req.body.id;
+    var result = await appointmentServices.Finish(id);
+    res.redirect("/");
+});
+
+
+app.get("/list", async (req, res) => {
+
+    //await appointmentServices.search("Pedro10@email.com");
+    
+    var appos = await appointmentServices.GetAll(true);
+    res.render("list",{appos});
+});
+
+app.get("/searchresult", async (req, res) => {
+    console.log(req.query.search);
+    res.json({});
+})
+
 
 
 app.listen(3000, () => {
