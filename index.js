@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const appointmentServices = require('./services/AppointmentServices');
 const Appointment = require('./models/Appointment');
 const AppointmentServices = require('./services/AppointmentServices');
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -76,6 +77,6 @@ app.get("/searchresult", async (req, res) => {
     res.render("list", { appos });
 })
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
     console.log(`Servidor rodando na porta 3000`);
 })
