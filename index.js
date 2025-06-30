@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 app.set('view engine', 'ejs');
 
-mongoose.connect("mongodb://localhost:27017/agendamentos");
+mongoose.connect(process.env.MONGO_URI);
 
 
 app.get('/', (req, res) => {
