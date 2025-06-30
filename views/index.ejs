@@ -9,6 +9,11 @@
 </head>
 
 <body>
+  <a href="/consulta">
+    <button style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;">
+      Nova Consulta
+    </button>
+  </a>
   <div id="calendar"></div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
@@ -19,7 +24,7 @@
     locale: 'pt-br',
     events: 'getcalendar',
     eventClick: function (info) {
-      window.location.href = "/event/"+info.event.id;
+      window.location.href = "/event/" + info.event.id;
     }
   })
 
