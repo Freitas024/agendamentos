@@ -21,6 +21,8 @@ class AppointmentFactory {
             title: `${simplesAppointment.name} - ${simplesAppointment.description}`,
             start: startDate.toISOString(), // <- formato ISO exigido pelo FullCalendar
             end: startDate.toISOString(),
+            notified: simplesAppointment.notified,
+            email: simplesAppointment.email
         };
 
         return appo;

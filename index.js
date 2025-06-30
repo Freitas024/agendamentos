@@ -7,7 +7,7 @@ const Appointment = require('./models/Appointment');
 const AppointmentServices = require('./services/AppointmentServices');
 
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.set('view engine', 'ejs');
@@ -23,7 +23,7 @@ app.get("/consulta", (req, res) => {
     res.render("create");
 });
 
-app.post("/create", async(req, res) => {
+app.post("/create", async (req, res) => {
     var status = await appointmentServices.Create(
         req.body.name,
         req.body.email,
@@ -33,7 +33,7 @@ app.post("/create", async(req, res) => {
         req.body.time
     )
 
-    if(status) {
+    if (status) {
         res.redirect("/");
     } else {
         res.send("Erro ao criar agendamento");
@@ -53,7 +53,7 @@ app.get("/getcalendar", async (req, res) => {
 app.get("/event/:id", async (req, res) => {
     var appointment = await AppointmentServices.GetById(req.params.id);
     console.log(appointment);
-    res.render("event", {appo: appointment});
+    res.render("event", { appo: appointment });
 })
 
 
@@ -65,19 +65,16 @@ app.post("/finish", async (req, res) => {
 
 
 app.get("/list", async (req, res) => {
-
-    //await appointmentServices.search("Pedro10@email.com");
-    
     var appos = await appointmentServices.GetAll(true);
-    res.render("list",{appos});
+    res.render("list", { appos });
 });
 
 app.get("/searchresult", async (req, res) => {
-    console.log(req.query.search);
-    res.json({});
+
+    var appos = await appointmentServices.search(req.query.search);
+
+    res.render("list", { appos });
 })
-
-
 
 app.listen(3000, () => {
     console.log(`Servidor rodando na porta 3000`);

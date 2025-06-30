@@ -1,5 +1,9 @@
 var appointmentModel = require("../models/Appointment");
 var AppointmentFactory = require("../factories/AppointmentFactory");
+var mailer = require("nodemailer");
+
+
+require('dotenv').config();
 
 class AppointmentServices {
   async Create(name, email, cpf, description, date, time) {
@@ -11,6 +15,7 @@ class AppointmentServices {
       date: date,
       time: time,
       finished: false,
+      notified: false,
     });
 
     try {
@@ -30,7 +35,7 @@ class AppointmentServices {
       var appos = await appointmentModel.find({ finished: false });
       var appointments = [];
 
-      appos.forEach( appointment => {
+      appos.forEach(appointment => {
         if (appointment.date != undefined) {
           appointments.push(AppointmentFactory.Build(appointment));
         }
@@ -40,37 +45,38 @@ class AppointmentServices {
     }
   }
 
-  async GetById(id){
+  async GetById(id) {
 
     try {
       return await appointmentModel.findById(id);
-      
-    }catch (error) {
+
+    } catch (error) {
       console.log(error);
     }
   }
 
-  async Finish(id){
+  async Finish(id) {
     try {
-      await appointmentModel.findByIdAndUpdate(id, {finished: true});
+      await appointmentModel.findByIdAndUpdate(id, { finished: true });
       return true;
 
-    }catch(error) {
+    } catch (error) {
       console.log(`Erro: ${error}`);
       return false;
     }
   }
 
-  async search(query){
+  async search(query) {
     try {
-      var appos = await appointmentModel.find().or([{email: query},{cpf: query}])
+      var appos = await appointmentModel.find().or([{ email: query }, { cpf: query }])
       return appos;
-    }catch(error){
+    } catch (error) {
       console.log(error);
       return [];
     }
     console.log(appos);
   }
+
 }
 
 module.exports = new AppointmentServices();
