@@ -14,12 +14,14 @@ class AppointmentFactory {
 
         const [hour, minutes] = simplesAppointment.time.split(":").map(Number);
 
-        const startDate = new Date(year, month - 1, day, hour, minutes, 0, 0);
+        const startDate = new Date(Date.UTC(year, month-1, day + 1, hour, minutes));
+        console.log(startDate.toISOString()); // '2025-07-06T23:30:00.000Z'
+
 
         const appo = {
-            id: simplesAppointment._id?.toString() || simplesAppointment.id, // <- garante ID válido
+            id: simplesAppointment._id?.toString() || simplesAppointment.id,
             title: `${simplesAppointment.name} - ${simplesAppointment.description}`,
-            start: startDate.toISOString(), // <- formato ISO exigido pelo FullCalendar
+            start: startDate.toISOString(),
             end: startDate.toISOString(),
             notified: simplesAppointment.notified,
             email: simplesAppointment.email
@@ -30,3 +32,4 @@ class AppointmentFactory {
 }
 
 module.exports = new AppointmentFactory();
+
