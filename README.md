@@ -7,28 +7,46 @@
 <h2>
     🚀 Funcionalidades
 </h2>
-<p>
-    # Cadastro de novos agendamentos (nome, e-mail, descrição e data).
-    # Listagem de agendamentos cadastrados.
-    # Marcar agendamentos como concluídos.
-    # Remover agendamentos.
-    # Interface dinâmica com EJS.
-</p>
+<ul>
+    <li>
+        # Cadastro de novos agendamentos (nome, e-mail, descrição e data).
+    </li>
+    <li>
+        # Listagem de agendamentos cadastrados.
+    </li>
+    <li>
+        # Marcar agendamentos como concluídos.
+    </li>
+    <li>
+        # Remover agendamentos.
+    </li>
+    <li>
+        # Interface dinâmica com EJS.
+    </li>
+</ul>
 
 <h2>
     🛠️ Tecnologias Utilizadas
 </h2>
-<p>
-    # Node.js — Backend.
-    # Express.js — Framework para rotas e servidor.
-    # MongoDB + Mongoose — Banco de dados NoSQL.
-    # EJS — Template engine para renderização no servidor.
-</p>
-
+<ul>
+    <li>
+        # Node.js — Backend.
+    </li>
+    <li>
+        # Express.js — Framework para rotas e servidor.
+    </li>
+    <li>
+        # MongoDB + Mongoose — Banco de dados NoSQL.
+    </li>
+    <li>
+        # EJS — Template engine para renderização no servidor.
+    </li>
+</ul>
 <h2>
     ⚙️ Como Executar o Projeto
 </h2>
 <p>
+
     # 1. Clone o repositório
     # git clone https://github.com/seu-usuario/agendamentos.git
 
