@@ -13,7 +13,9 @@ app.use(bodyParser.json());
 
 app.set('view engine', 'ejs');
 
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('✅ Conectado ao MongoDB'))
+  .catch(err => console.error('❌ Erro ao conectar ao MongoDB:', err));
 
 
 app.get('/', (req, res) => {
